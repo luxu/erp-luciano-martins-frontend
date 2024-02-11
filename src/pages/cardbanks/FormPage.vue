@@ -59,33 +59,25 @@ export default defineComponent({
     ];
     const isUpdate = computed(() => route.params.id);
 
-    const handleGetProduct = async (id) => {
+    const handleGetCardbank = async (id) => {
       try {
-        const product = await api.get(`pagamentos/${id}`);
-        form.value = product.data.data;
+        const cardbank = await api.get(`cardbanks/${id}`);
+        form.value = cardbank.data.data;
       } catch (error) {
         notifyError(error.message);
       }
     };
 
     const handlerSubmit = async () => {
-      const { description } = form.value;
-      const price = parseFloat(form.value.price);
-      const quantity = parseInt(form.value.quantity, 10);
-      const payload = {
-        description,
-        price,
-        quantity,
-      };
       try {
         if (isUpdate.value) {
-          await api.patch(`pagamentos/${isUpdate.value}`, payload);
+          await api.patch(`cardbanks/${isUpdate.value}`, form.value);
           notifySuccess('Update Successfully');
         } else {
-          await api.post('pagamentos', payload);
+          await api.post('cardbanks', form.value);
           notifySuccess('Saved Successfully');
         }
-        router.push({ name: 'pagamento' });
+        router.push({ name: 'cardbank' });
       } catch (error) {
         notifyError(error.message);
       }
@@ -93,7 +85,7 @@ export default defineComponent({
 
     onMounted(() => {
       if (isUpdate.value) {
-        handleGetProduct(isUpdate.value);
+        handleGetCardbank(isUpdate.value);
       }
     });
 

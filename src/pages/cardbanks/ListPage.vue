@@ -79,7 +79,7 @@ export default defineComponent({
     ])
     const loading = ref(false);
     const router = useRouter();
-    // const { notifyError, notifySuccess } = useNotify();
+    const { notifyError } = useNotify();
     // const $q = useQuasar();
 
     const handlerGetList = async () => {
@@ -96,13 +96,18 @@ export default defineComponent({
       }
     };
 
+    const handlerEdit = (cardbank) => {
+      router.push({ name: 'form-cardbank', params: { id: cardbank.id } });
+    };
+
     return {
       form,
       loading,
       columns,
       rows,
       router,
-      handlerGetList
+      handlerGetList,
+      handlerEdit
     }
   }
 })
