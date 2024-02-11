@@ -9,7 +9,7 @@ const routes = [
       { path: '/parcelas', name: 'parcelas', component: () => import('pages/parcelas/ParcelasPage.vue') },
       { path: '/segmentos', name: 'segmentos', component: () => import('pages/segmentos/SegmentosPage.vue') },
       { path: '/cardbanks', name: 'cardbanks', component: () => import('pages/cardbanks/ListPage.vue') },
-      { path: '/form-cardbank', name: 'form-cardbank', component: () => import('pages/cardbanks/FormPage.vue') },
+      { path: '/form-cardbank/:id?', name: 'form-cardbank', component: () => import('pages/cardbanks/FormPage.vue') },
     ]
   },
 

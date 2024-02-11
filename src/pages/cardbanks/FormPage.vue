@@ -12,7 +12,7 @@
             label="Nome do Cartão"
             outlined
             class="col-xs-12 col-sm-12 col-md-8 col-lg-7"
-            v-model="form.description"
+            v-model="form.name"
             :rules="requiredRules"
           />
           <div class="col-xs-12 col-sm-12 col-md-8 col-lg-7 q-mt-md">
@@ -62,7 +62,7 @@ export default defineComponent({
     const handleGetCardbank = async (id) => {
       try {
         const cardbank = await api.get(`cardbanks/${id}`);
-        form.value = cardbank.data.data;
+        form.value = cardbank.data;
       } catch (error) {
         notifyError(error.message);
       }
@@ -71,13 +71,13 @@ export default defineComponent({
     const handlerSubmit = async () => {
       try {
         if (isUpdate.value) {
-          await api.patch(`cardbanks/${isUpdate.value}`, form.value);
+          await api.put(`cardbanks/${isUpdate.value}`, form.value);
           notifySuccess('Update Successfully');
         } else {
           await api.post('cardbanks', form.value);
           notifySuccess('Saved Successfully');
         }
-        router.push({ name: 'cardbank' });
+        router.push({ name: 'cardbanks' });
       } catch (error) {
         notifyError(error.message);
       }

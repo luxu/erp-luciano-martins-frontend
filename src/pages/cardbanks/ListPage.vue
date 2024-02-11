@@ -17,16 +17,6 @@
             :to="{ name: 'form-cardbank' }"
           />
         </template>
-        <template v-slot:body-cell-description="props">
-          <q-td :props="props">
-            <div>
-              <q-badge color="purple" :label="props.value" />
-            </div>
-            <div class="my-table-details">
-              {{ props.row.description }}
-            </div>
-          </q-td>
-        </template>
         <template v-slot:body-cell-actions="props">
           <q-td :props="props" class="q-gutter-x-sm">
             <q-btn
@@ -59,11 +49,12 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, ref } from 'vue'
+import { defineComponent, ref, onMounted } from 'vue'
 import { columns } from './table';
-// import { useQuasar } from 'quasar';
+import { useQuasar } from 'quasar';
 import { useRouter } from 'vue-router';
 import useNotify from 'src/composables/UseNotify';
+import { api } from 'boot/axios';
 
 export default defineComponent({
   name: 'GastosPage',
@@ -72,24 +63,20 @@ export default defineComponent({
       id: '',
       name: '',
     })
-    const rows = ref([
-          { 'id': 1, 'name': 'BB'},
-          { 'id': 2, 'name': 'Itaú'},
-          { 'id': 3, 'name': 'BB-Zenaide'},
-    ])
+    const rows = ref([])
     const loading = ref(false);
     const router = useRouter();
-    const { notifyError } = useNotify();
-    // const $q = useQuasar();
+    const { notifyError, notifySuccess } = useNotify();
+    const $q = useQuasar();
 
     const handlerGetList = async () => {
       try {
         loading.value = true;
-        // const { data } = await api.get('pagamentos');
-        // rows.value = data.data.map((product) => ({
-        //   uid: product.uid,
-        //   ...product.attributes,
-        // }));
+        const { data } = await api.get('cardbanks');
+        rows.value = data.map((cardbank) => ({
+          id: cardbank.id,
+          ...cardbank,
+        }));
         loading.value = false;
       } catch (error) {
         notifyError(error.message);
@@ -97,17 +84,39 @@ export default defineComponent({
     };
 
     const handlerEdit = (cardbank) => {
-      router.push({ name: 'form-cardbank', params: { id: cardbank.id } });
+      router.push({ name: 'form-cardbank', params: { id: cardbank.id } })
+    }
+
+    const handlerRemove = async (cardbank) => {
+      const description = cardbank.name || 'CARTÃO INEXISTENTE'
+      try {
+        $q.dialog({
+          title: 'Confirm',
+          message: `Do you really delete ${description}`,
+          cancel: true,
+          persistent: true,
+        }).onOk(async () => {
+          await api.delete(`cardbanks/${cardbank.id}`);
+          notifySuccess('Successfully deleted');
+          handlerGetList();
+        });
+      } catch (error) {
+        notifyError(error.message);
+      }
     };
+
+    onMounted(() => {
+      handlerGetList();
+    });
 
     return {
       form,
-      loading,
       columns,
       rows,
-      router,
+      loading,
       handlerGetList,
-      handlerEdit
+      handlerEdit,
+      handlerRemove,
     }
   }
 })
