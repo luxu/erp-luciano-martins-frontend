@@ -50,17 +50,35 @@ import EssentialLink from 'components/EssentialLink.vue'
 
 const linksList = [
   {
-    title: 'Docs',
-    caption: 'quasar.dev',
-    icon: 'school',
-    link: 'https://quasar.dev'
+    title: 'Gastos',
+    caption: '',
+    icon: 'mdi-bell-sleep',
+    routeName: 'gastos',
+  },
+  {
+    title: 'Parcelas',
+    caption: '',
+    icon: 'mdi-bell-sleep',
+    routeName: 'parcelas',
+  },
+  {
+    title: 'Segmentos',
+    caption: '',
+    icon: 'mdi-bell-sleep',
+    routeName: 'segmentos',
+  },
+  {
+    title: 'CardBank',
+    caption: '',
+    icon: 'mdi-bell-sleep',
+    routeName: 'cardbanks',
   },
   {
     title: 'Logout',
     caption: '',
     icon: 'exit_to_app',
     link: ''
-  }
+  },
 ]
 
 export default defineComponent({
