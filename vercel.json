@@ -9,8 +9,10 @@
   "routes": [
     { "src": "/(.*)", "dest": "/index.html" }
   ],
-  "vercel": {
-    "buildCommand": "quasar build",
-    "outputDirectory": "dist/spa"
-  }
+  "vercel": [
+    {
+      "buildCommand": "quasar build",
+      "outputDirectory": "dist/spa"
+    }
+  ]
 }
