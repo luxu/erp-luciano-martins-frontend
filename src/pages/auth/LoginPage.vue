@@ -48,8 +48,8 @@ const authUser = useAuthUser();
 const { notifySuccess, notifyError } = useNotify();
 
 const form = reactive({
-  username: 'admin',
-  password: 'Luxu1650#',
+  username: '',
+  password: '',
 });
 
 const submitting = ref(false);
