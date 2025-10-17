@@ -14,7 +14,7 @@ import { computed } from 'vue'
 import { useAttrs } from 'vue'
 import { Primitive } from 'radix-vue'
 import { cva } from 'class-variance-authority'
-import { cn } from '@/lib/utils'
+import { cn } from '../../../lib/utils'
 
 defineOptions({
   name: 'UiButton'
