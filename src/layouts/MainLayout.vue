@@ -35,6 +35,21 @@
           :key="link.title"
           v-bind="link"
         />
+
+        <q-item
+          clickable
+          @click="handleLogout"
+        >
+          <q-item-section
+            avatar
+          >
+            <q-icon name="exit_to_app" />
+          </q-item-section>
+
+          <q-item-section>
+            <q-item-label>Logout</q-item-label>
+          </q-item-section>
+        </q-item>
       </q-list>
     </q-drawer>
 
@@ -46,7 +61,10 @@
 
 <script lang="ts">
 import { defineComponent, ref } from 'vue'
+import { useRouter } from 'vue-router'
 import EssentialLink from 'components/EssentialLink.vue'
+import useAuthUser from 'composables/UseAuthUser'
+import useNotify from 'composables/UseNotify'
 
 const linksList = [
   {
@@ -72,13 +90,7 @@ const linksList = [
     caption: '',
     icon: 'mdi-bell-sleep',
     routeName: 'cardbanks',
-  },
-  {
-    title: 'Logout',
-    caption: '',
-    icon: 'exit_to_app',
-    link: ''
-  },
+  }
 ]
 
 export default defineComponent({
@@ -90,10 +102,20 @@ export default defineComponent({
 
   setup () {
     const leftDrawerOpen = ref(false)
+    const router = useRouter()
+    const { logout } = useAuthUser()
+    const { notifySuccess } = useNotify()
+
+    const handleLogout = () => {
+      logout()
+      notifySuccess('Logout realizado com sucesso.')
+      router.push('/login')
+    }
 
     return {
       essentialLinks: linksList,
       leftDrawerOpen,
+      handleLogout,
       toggleLeftDrawer () {
         leftDrawerOpen.value = !leftDrawerOpen.value
       }
