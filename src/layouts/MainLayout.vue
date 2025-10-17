@@ -63,8 +63,8 @@
 import { defineComponent, ref } from 'vue'
 import { useRouter } from 'vue-router'
 import EssentialLink from 'components/EssentialLink.vue'
-import useAuthUser from 'composables/UseAuthUser'
-import useNotify from 'composables/UseNotify'
+import useAuthUser from '../composables/UseAuthUser'
+import useNotify from '../composables/UseNotify'
 
 const linksList = [
   {
