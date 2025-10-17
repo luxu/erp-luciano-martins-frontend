@@ -13,15 +13,23 @@
     "build": "quasar build"
   },
   "dependencies": {
+    "class-variance-authority": "^0.7.0",
+    "clsx": "^2.1.0",
+    "lucide-vue-next": "^0.319.0",
     "@quasar/extras": "^1.16.4",
     "axios": "^1.2.1",
     "quasar": "^2.8.0",
+    "radix-vue": "^1.9.0",
+    "tailwind-merge": "^2.2.1",
+    "tailwind-variants": "^0.1.19",
     "vue": "3.4.15",
     "vue-router": "^4.0.12"
   },
   "devDependencies": {
     "@quasar/app-vite": "^1.4.3",
     "autoprefixer": "^10.4.2",
+    "tailwindcss": "^3.4.3",
+    "tailwindcss-animate": "^1.0.7",
     "eslint": "^8.11.0",
     "eslint-config-prettier": "^8.1.0",
     "eslint-plugin-vue": "^9.0.0",
