@@ -30,7 +30,6 @@ module.exports = configure(function (/* ctx */) {
     // --> boot files are part of "main.js"
     // https://v2.quasar.dev/quasar-cli-vite/boot-files
     boot: [
-
       'axios',
     ],
 
@@ -48,10 +47,8 @@ module.exports = configure(function (/* ctx */) {
       // 'themify',
       // 'line-awesome',
       // 'roboto-font-latin-ext', // this or either 'roboto-font', NEVER both!
-
       'roboto-font', // optional, you are not bound to it
       'material-icons', // optional, you are not bound to it
-
       'mdi-v5',
     ],
 
