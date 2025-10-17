@@ -2,7 +2,7 @@
   "name": "frontend",
   "version": "0.0.1",
   "description": "Projeto como parte do meu sistema feito para o front",
-  "productName": "Erp-frontend",
+  "productName": "erp-luciano-martins-frontend",
   "author": "Luciano Martins <zicadopv@gmail.com>",
   "private": true,
   "scripts": {
@@ -10,7 +10,6 @@
     "format": "prettier --write \"**/*.{js,vue,scss,html,md,json}\" --ignore-path .gitignore",
     "test": "echo \"No test specified\" && exit 0",
     "dev": "quasar dev",
-    "start": "serve dist/spa",
     "build": "quasar build"
   },
   "dependencies": {
