@@ -1,4 +1,6 @@
 import { ref } from 'vue';
+import { api } from 'boot/axios';
+import { LocalStorage } from 'quasar';
 const user = ref(null);
 
 export default function useAuthUser() {
