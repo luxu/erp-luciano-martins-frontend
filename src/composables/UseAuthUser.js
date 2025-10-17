@@ -14,7 +14,7 @@ export default function useAuthUser() {
    * Login with email and password
    */
   const login = async ({ username, password }) => {
-    const { data } = await api.post('/api/v1/auth/token', {
+    const { data } = await api.post('auth/token', {
       username,
       password,
     });
