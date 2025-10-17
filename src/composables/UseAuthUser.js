@@ -1,7 +1,13 @@
 import { ref } from 'vue';
 import { api } from 'boot/axios';
 import { LocalStorage } from 'quasar';
+
 const user = ref(null);
+
+const storedToken = LocalStorage.getItem('auth_token');
+if (storedToken) {
+  user.value = { token: storedToken };
+}
 
 export default function useAuthUser() {
   /**
@@ -11,28 +17,32 @@ export default function useAuthUser() {
     const { data } = await api.post('/api/v1/auth/token', {
       username,
       password,
-    })
-    LocalStorage.set('auth_token', data.access)
-    return data
-  }
+    });
+    LocalStorage.set('auth_token', data.access);
+    user.value = {
+      username,
+      token: data.access,
+    };
+    return data;
+  };
 
   /**
    * Logout
    */
-  // const logout = async () => {
-  //   const { error } = await supabase.auth.signOut();
-  //   if (error) throw error;
-  // };
+  const logout = () => {
+    LocalStorage.remove('auth_token');
+    user.value = null;
+  };
 
   /**
    * Check if the user is logged in or not
    */
-  const isLoggedIn = () => !!user.value;
+  const isLoggedIn = () => !!LocalStorage.getItem('auth_token');
 
   return {
     user,
     login,
+    logout,
     isLoggedIn,
-    // logout,
   };
 }
