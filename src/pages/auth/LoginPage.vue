@@ -40,8 +40,8 @@
 <script setup>
 import { reactive, ref } from 'vue';
 import { useRouter } from 'vue-router';
-import useAuthUser from 'composables/UseAuthUser';
-import useNotify from 'composables/UseNotify';
+import useAuthUser from '../../composables/UseAuthUser';
+import useNotify from '../../composables/UseNotify';
 
 const router = useRouter();
 const authUser = useAuthUser();
