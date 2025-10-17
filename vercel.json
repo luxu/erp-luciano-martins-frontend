@@ -3,8 +3,7 @@
     { 
       "src": "package.json", 
       "use": "@vercel/static-build", 
-      "config": { "distDir": "dist/spa" },
-      "vercel": { "buildCommand": "quasar build", "outputDirectory": "dist/spa"}  
+      "config": { "distDir": "dist/spa" }
     }
   ],
   "routes": [
