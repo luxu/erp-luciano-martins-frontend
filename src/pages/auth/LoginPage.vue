@@ -73,7 +73,10 @@ const onSubmit = async () => {
     notifySuccess('Login realizado com sucesso.');
     router.push('/');
   } catch (error) {
-    const message = error?.response?.data?.detail || 'Não foi possível realizar o login.';
+    const message = error?.response?.data?.detail
+           || error?.response?.data?.message
+           || 'Não foi possível realizar o login.';
+    console.error('Login error:', error);
     notifyError(message);
   } finally {
     submitting.value = false;
