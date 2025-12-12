@@ -57,7 +57,9 @@ import useNotify from 'src/composables/UseNotify';
 import { api } from 'boot/axios';
 
 export default defineComponent({
-  name: 'GastosPage',
+  
+  name: 'SegmentoPage',
+  
   setup () {
     const form = ref({
       id: '',
@@ -72,10 +74,11 @@ export default defineComponent({
     const handlerGetList = async () => {
       try {
         loading.value = true;
-        const { data } = await api.get('cardbanks');
-        rows.value = data.map((cardbank) => ({
-          id: cardbank.id,
-          ...cardbank,
+        const { data } = await api.get('segmentos');
+        console.log('Data', data);        
+        rows.value = data.map(segmento => ({
+          id: segmento.id,
+          ...segmento,
         }));
         loading.value = false;
       } catch (error) {

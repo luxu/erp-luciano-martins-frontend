@@ -73,7 +73,8 @@ export default defineComponent({
       try {
         loading.value = true;
         const { data } = await api.get('cardbanks');
-        rows.value = data.map((cardbank) => ({
+        console.log(data.items);        
+        rows.value = data.items.map(cardbank => ({
           id: cardbank.id,
           ...cardbank,
         }));
