@@ -2,26 +2,32 @@
   <q-page class="row items-center justify-center q-pa-md">
     <q-card class="q-pa-lg" style="min-width: 320px; max-width: 400px;">
       <q-card-section>
-        <div class="text-h5 text-primary text-center">Entrar</div>
+        <div class="text-h5 text-primary text-center">ERP Luciano Martins</div>
+        <div class="text-h5 text-primary text-center">Login</div>
       </q-card-section>
 
       <q-form @submit.prevent="onSubmit" class="q-gutter-md">
         <q-input
           v-model="form.username"
           label="Usuário"
-          outlined
+          filled
           required
           autocomplete="username"
         />
 
-        <q-input
+        <q-input 
           v-model="form.password"
+          filled
           label="Senha"
-          type="password"
-          outlined
-          required
-          autocomplete="current-password"
-        />
+          :type="isPwd ? 'password' : 'text'">
+            <template v-slot:append>
+              <q-icon
+                :name="isPwd ? 'visibility_off' : 'visibility'"
+                class="cursor-pointer"
+                @click="isPwd = !isPwd"
+              />
+            </template>
+        </q-input>
 
         <div class="row justify-end q-gutter-sm">
           <q-btn
@@ -51,6 +57,8 @@ const form = reactive({
   username: '',
   password: '',
 });
+
+const isPwd = ref(true);
 
 const submitting = ref(false);
 
