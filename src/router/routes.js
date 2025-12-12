@@ -12,8 +12,8 @@ const routes = [
     component: () => import('layouts/MainLayout.vue'),
     children: [
       { path: '', component: () => import('pages/IndexPage.vue') },
-      { path: '/gastos', name: 'gastos', component: () => import('pages/gastos/GastosPage.vue') },
-      { path: '/parcelas', name: 'parcelas', component: () => import('pages/parcelas/ParcelasPage.vue') },
+      { path: '/gastos', name: 'gastos', component: () => import('pages/gastos/ListPage.vue') },
+      { path: '/parcelas', name: 'parcelas', component: () => import('src/pages/parcelas/ListPage.vue') },
       { path: '/segmentos', name: 'segmentos', component: () => import('pages/segmentos/ListPage.vue') },
       { path: '/cardbanks', name: 'cardbanks', component: () => import('pages/cardbanks/ListPage.vue') },
       { path: '/form-cardbank/:id?', name: 'form-cardbank', component: () => import('pages/cardbanks/FormPage.vue') },
