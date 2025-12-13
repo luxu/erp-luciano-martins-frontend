@@ -75,7 +75,6 @@ export default defineComponent({
       try {
         loading.value = true;
         const { data } = await api.get('segmentos');
-        console.log('Data', data);        
         rows.value = data.map(segmento => ({
           id: segmento.id,
           ...segmento,

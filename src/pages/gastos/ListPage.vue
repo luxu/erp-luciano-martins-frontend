@@ -58,7 +58,7 @@ import { api } from 'boot/axios';
 
 export default defineComponent({
   
-  name: 'SegmentoPage',
+  name: 'GastoPage',
   
   setup () {
     const form = ref({
