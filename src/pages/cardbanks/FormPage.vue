@@ -71,7 +71,7 @@ export default defineComponent({
     const handlerSubmit = async () => {
       try {
         if (isUpdate.value) {
-          await api.put(`cardbanks/${isUpdate.value}`, form.value);
+          await api.patch(`cardbanks/${isUpdate.value}`, form.value);
           notifySuccess('Update Successfully');
         } else {
           await api.post('cardbanks', form.value);
