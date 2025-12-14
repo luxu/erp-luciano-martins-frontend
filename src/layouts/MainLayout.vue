@@ -11,9 +11,7 @@
           @click="toggleLeftDrawer"
         />
 
-        <q-toolbar-title>
-          ERP Luciano Martins - Developer
-        </q-toolbar-title>
+        <q-toolbar-title>ERP Luciano Martins</q-toolbar-title>
 
         <q-btn-toggle
           v-model="isDark"
