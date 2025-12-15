@@ -14,7 +14,7 @@
             color="primary"
             label="Adicionar Segmento"
             icon="add"
-            :to="{ name: 'form-cardbank' }"
+            :to="{ name: 'form-segmento' }"
           />
         </template>
         <template v-slot:body-cell-actions="props">
@@ -85,12 +85,12 @@ export default defineComponent({
       }
     };
 
-    const handlerEdit = (cardbank) => {
-      router.push({ name: 'form-cardbank', params: { id: cardbank.id } })
+    const handlerEdit = segmento => {
+      router.push({ name: 'form-segmento', params: { id: segmento.id } })
     }
 
-    const handlerRemove = async (cardbank) => {
-      const description = cardbank.name || 'CARTÃO INEXISTENTE'
+    const handlerRemove = async (segmento) => {
+      const description = segmento.name || 'COMÉRCIO INEXISTENTE'
       try {
         $q.dialog({
           title: 'Confirm',
@@ -98,7 +98,7 @@ export default defineComponent({
           cancel: true,
           persistent: true,
         }).onOk(async () => {
-          await api.delete(`cardbanks/${cardbank.id}`);
+          await api.delete(`segmentos/${segmento.id}`);
           notifySuccess('Successfully deleted');
           handlerGetList();
         });

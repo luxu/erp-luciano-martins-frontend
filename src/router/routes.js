@@ -12,11 +12,18 @@ const routes = [
     component: () => import('layouts/MainLayout.vue'),
     children: [
       { path: '', component: () => import('pages/IndexPage.vue'), meta: { requiresAuth: true } },
+      { path: '/home',  name: 'home', component: () => import('pages/IndexPage.vue'), meta: { requiresAuth: true } },
+      // Gastos
       { path: '/gastos', name: 'gastos', component: () => import('pages/gastos/ListPage.vue') },
+      { path: '/form-gasto/:id?', name: 'form-gasto', component: () => import('pages/gastos/FormPage.vue') },
+      // Parcelas
       { path: '/parcelas', name: 'parcelas', component: () => import('src/pages/parcelas/ListPage.vue') },
+      // Segmentos
       { path: '/segmentos', name: 'segmentos', component: () => import('pages/segmentos/ListPage.vue') },
+      { path: '/form-segmento/:id?', name: 'form-segmento', component: () => import('pages/segmentos/FormPage.vue') },
+      // Card Banks
       { path: '/cardbanks', name: 'cardbanks', component: () => import('pages/cardbanks/ListPage.vue') },
-      { path: '/form-cardbank/:id?', name: 'form-cardbank', component: () => import('pages/cardbanks/FormPage.vue') },      
+      { path: '/form-cardbank/:id?', name: 'form-cardbank', component: () => import('pages/cardbanks/FormPage.vue') },
     ]
   },
 

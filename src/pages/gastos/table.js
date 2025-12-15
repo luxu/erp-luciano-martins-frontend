@@ -30,13 +30,6 @@ const columns = [
     sortable: true,
   },
   {
-    name: 'total',
-    label: 'total',
-    align: 'left',
-    field: (val) => val.total,
-    sortable: true,
-  },
-  {
     name: 'segmento',
     label: 'Segmento',
     align: 'left',
@@ -45,14 +38,14 @@ const columns = [
   },
   {
     name: 'card_bank',
-    label: 'Cardbank',
+    label: 'Banco do cartão',
     align: 'left',
     field: (val) => val.card_bank.name,
     sortable: true,
   },
   {
     name: 'opcoes_cartao',
-    label: 'Opção do cartão',
+    label: 'Tipo de pagamento',
     align: 'left',
     field: (val) => val.opcoes_cartao,
     sortable: true,
@@ -60,12 +53,28 @@ const columns = [
     format: (val) => opcoesMapa[val] || val // Tenta mapear, se não encontrar, retorna o valor original
   },
   {
-    name: 'description_on_invoice',
-    label: 'Description on invoice',
+    name: 'total',
+    label: 'Total',
     align: 'left',
-    field: (val) => val.description_on_invoice,
+    field: (val) => val.total,
     sortable: true,
   },
+  // {
+  //   name: 'description_on_invoice',
+  //   label: 'Descrição na fatura',
+  //   align: 'left',
+  //   field: (val) => val.description_on_invoice,
+  //   sortable: true,
+  // },
+  // {
+  //   name: 'more_infos',
+  //   label: 'Infos Complementares',
+  //   align: 'left',
+  //   field: (val) => val.more_infos,
+  //   sortable: true,
+  //   // 💡 Função de formatação: Recebe o valor original e retorna o valor mapeado
+  //   format: (val) => opcoesMapa[val] || val // Tenta mapear, se não encontrar, retorna o valor original
+  // },
   {
     name: 'actions',
     align: 'right',

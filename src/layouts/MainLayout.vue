@@ -79,6 +79,12 @@ import { LocalStorage, useQuasar } from 'quasar'
 
 const linksList = [
   {
+    title: 'Início',
+    caption: '',
+    icon: 'mdi-bell-sleep',
+    routeName: 'home',
+  },
+  {
     title: 'Gastos',
     caption: '',
     icon: 'mdi-bell-sleep',

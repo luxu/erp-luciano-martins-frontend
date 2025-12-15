@@ -3,13 +3,13 @@
     <div class="row justify-center">
       <div class="col-12 text-center">
         <p class="text-h6">
-          Form CardBank
+          Form Segmento
         </p>
       </div>
       <div class="q-pa-md" style="max-width: 300px">
         <q-form class="col-md-7 col-xs-12 col-sm-12 q-gutter-y-md" @submit.prevent="handlerSubmit">
           <q-input
-            label="Nome do Cartão"
+            label="Nome do Comércio"
             outlined
             class="col-xs-12 col-sm-12 col-md-8 col-lg-7"
             v-model="form.name"
@@ -27,7 +27,7 @@
               type="submit"
               color="white"
               class="text-black float-right q-mr-md"
-              :to="{ name: 'cardbanks' }"
+              :to="{ name: 'segmentos' }"
             />
           </div>
         </q-form>
@@ -59,10 +59,10 @@ export default defineComponent({
     ];
     const isUpdate = computed(() => route.params.id);
 
-    const handleGetCardbank = async (id) => {
+    const handleGetSegmento = async (id) => {
       try {
-        const cardbank = await api.get(`cardbanks/${id}`);
-        form.value = cardbank.data;
+        const segmento = await api.get(`segmentos/${id}`);
+        form.value = segmento.data;
       } catch (error) {
         notifyError(error.message);
       }
@@ -71,13 +71,13 @@ export default defineComponent({
     const handlerSubmit = async () => {
       try {
         if (isUpdate.value) {
-          await api.put(`cardbanks/${isUpdate.value}`, form.value);
+          await api.patch(`segmentos/${isUpdate.value}`, form.value);
           notifySuccess('Update Successfully');
         } else {
-          await api.post('cardbanks', form.value);
+          await api.post('segmentos', form.value);
           notifySuccess('Saved Successfully');
         }
-        router.push({ name: 'cardbanks' });
+        router.push({ name: 'segmentos' });
       } catch (error) {
         notifyError(error.message);
       }
@@ -85,7 +85,7 @@ export default defineComponent({
 
     onMounted(() => {
       if (isUpdate.value) {
-        handleGetCardbank(isUpdate.value);
+        handleGetSegmento(isUpdate.value);
       }
     });
 

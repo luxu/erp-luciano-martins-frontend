@@ -40,7 +40,7 @@ api.interceptors.response.use(
       // Chame a sua função de logout do store aqui, se houver.
       
       // 3. Redirecionar para a tela de login
-      router.push('/logout'); // Ajuste o caminho conforme sua rota de login
+      router.push('/login'); // Ajuste o caminho conforme sua rota de login
       
       // Impede que o erro continue para o código que fez a requisição
       return Promise.reject(error); 

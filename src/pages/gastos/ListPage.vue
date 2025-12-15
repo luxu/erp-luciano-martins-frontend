@@ -14,7 +14,7 @@
             color="primary"
             label="Adicionar Gasto"
             icon="add"
-            :to="{ name: 'form-cardbank' }"
+            :to="{ name: 'form-gasto' }"
           />
         </template>
         <template v-slot:body-cell-actions="props">
@@ -61,10 +61,6 @@ export default defineComponent({
   name: 'GastoPage',
   
   setup () {
-    const form = ref({
-      id: '',
-      name: '',
-    })
     const rows = ref([])
     const loading = ref(false);
     const router = useRouter();
@@ -85,12 +81,12 @@ export default defineComponent({
       }
     };
 
-    const handlerEdit = (cardbank) => {
-      router.push({ name: 'form-cardbank', params: { id: cardbank.id } })
+    const handlerEdit = gasto => {
+      router.push({ name: 'form-gasto', params: { id: gasto.id } })
     }
 
-    const handlerRemove = async (cardbank) => {
-      const description = cardbank.name || 'CARTÃO INEXISTENTE'
+    const handlerRemove = async (gasto) => {
+      const description = gasto.name || 'GASTO INEXISTENTE'
       try {
         $q.dialog({
           title: 'Confirm',
@@ -98,7 +94,7 @@ export default defineComponent({
           cancel: true,
           persistent: true,
         }).onOk(async () => {
-          await api.delete(`cardbanks/${cardbank.id}`);
+          await api.delete(`gastos/${gasto.id}`);
           notifySuccess('Successfully deleted');
           handlerGetList();
         });
@@ -112,7 +108,6 @@ export default defineComponent({
     });
 
     return {
-      form,
       columns,
       rows,
       loading,
