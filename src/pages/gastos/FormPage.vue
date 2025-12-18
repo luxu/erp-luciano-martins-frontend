@@ -132,6 +132,17 @@
         </div>
         </q-form>
     </div>
+    <div class="q-pa-md q-gutter-md dark-bg">
+      <ParcelasSection 
+        v-model="parcelas"
+      />
+      <q-card-actions align="left">
+          <q-btn flat label="Back" icon="arrow_back" color="white" class="bg-grey-7" />
+          <q-btn label="Save" icon="check" color="positive"/>
+      </q-card-actions>
+    </div>
+
+
   </q-page>
 </template>
 
@@ -143,9 +154,14 @@ import {
 import { api } from 'boot/axios';
 import { useRoute, useRouter } from 'vue-router';
 import useNotify from 'src/composables/UseNotify';
+import ParcelasSection from './ParcelasSection.vue';
 
 export default defineComponent({
   name: 'FormPageGasto',
+  // 2. Registre o componente para que o template o reconheça
+  components: {
+    ParcelasSection
+  },
   setup() {
     const form = ref({
       name: '',
@@ -171,6 +187,23 @@ export default defineComponent({
       (val) => (val && val.length > 0) || 'Este campo é obrigatório',
     ];
     const isUpdate = computed(() => route.params.id);
+
+    // Função auxiliar (também precisa da verificação)
+    const calculateFirstParcelDate = (dateStr) => {
+        // 🚨 VERIFICAÇÃO na inicialização
+        if (!dateStr || dateStr.indexOf('/') === -1) return ''; 
+        
+        const parts = dateStr.split('/');
+        const date = new Date(parts[2], parts[1] - 1, parts[0]); 
+        date.setDate(date.getDate() + 30); 
+        const d = date.getDate().toString().padStart(2, '0');
+        const m = (date.getMonth() + 1).toString().padStart(2, '0');
+        const y = date.getFullYear();
+        return `${d}/${m}/${y}`;
+    };
+
+    // Se a data de gasto é vazia, a data da primeira parcela também será vazia.
+    const initialParcelDate = calculateFirstParcelDate(form.value.datagasto);
 
     const handleGetGasto = async (id) => {
       try {
@@ -263,6 +296,14 @@ export default defineComponent({
       requiredRules,
       handlerSubmit,
       isUpdate,
+      parcelas: [
+        { 
+          total_parcelas: 1, 
+          parcela_nro: 1, 
+          valor: 0.00,
+          data_parcela: initialParcelDate // Agora será ''
+        }
+      ]
     };
   },
 });
