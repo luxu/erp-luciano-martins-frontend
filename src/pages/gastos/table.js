@@ -47,7 +47,7 @@ const columns = [
     name: 'opcoes_cartao',
     label: 'Tipo de pagamento',
     align: 'left',
-    field: (val) => val.opcoes_cartao,
+    field: (val) => val.opcoes_cartao || '-',
     sortable: true,
     // 💡 Função de formatação: Recebe o valor original e retorna o valor mapeado
     format: (val) => opcoesMapa[val] || val // Tenta mapear, se não encontrar, retorna o valor original

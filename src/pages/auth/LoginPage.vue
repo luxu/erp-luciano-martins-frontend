@@ -54,8 +54,8 @@ const authUser = useAuthUser();
 const { notifySuccess, notifyError } = useNotify();
 
 const form = reactive({
-  username: '',
-  password: '',
+  username: 'admin',
+  password: '2',
 });
 
 const isPwd = ref(true);

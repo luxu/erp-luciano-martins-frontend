@@ -28,7 +28,7 @@
           <div class="col-2">
             <q-input
               filled
-              :model-value="parcela.parcela_nro"
+              :model-value="parcela.numero_parcela"
               label="Parcela nro"
               type="number"
               readonly
@@ -38,8 +38,8 @@
           <div class="col-3">
             <q-input
               filled
-              :model-value="parcela.valor"
-              @update:model-value="updateParcelaField(index, 'valor', $event)"
+              :model-value="parcela.valor_parcela"
+              @update:model-value="updateParcelaField(index, 'valor_parcela', $event)"
               label="Valor da Parcela"
               type="number"
               prefix="R$"
@@ -83,8 +83,6 @@
 <script setup>
 import { computed } from 'vue';
 
-// Define as props que o componente espera receber do pai.
-// 'modelValue' é o nome padrão para usar v-model no componente.
 const props = defineProps({
   modelValue: {
     type: Array,
@@ -92,17 +90,13 @@ const props = defineProps({
   }
 });
 
-// Define os eventos que o componente pode emitir.
 const emit = defineEmits(['update:modelValue']);
 
-// Usa 'computed' para gerenciar o array de parcelas. 
-// O get retorna as props, e o set emite o evento de atualização para o pai.
 const model = computed({
   get: () => props.modelValue,
   set: (value) => emit('update:modelValue', value)
 });
 
-// 📌 FUNÇÃO UTILITÁRIA PARA CÁLCULO DE DATA
 const addDaysToDate = (dateStr, days) => {
     // 🚨 VERIFICAÇÃO: Se a string da data for vazia ou inválida, retorna string vazia.
     if (!dateStr || dateStr.indexOf('/') === -1) return '';
@@ -123,12 +117,10 @@ const addDaysToDate = (dateStr, days) => {
     return `${d}/${m}/${y}`;
 };
 
-// 1. Adiciona uma nova linha de parcela
 const addParcela = () => {
     const currentParcelas = [...model.value];
     const nextNro = currentParcelas.length + 1;
-    const totalParcelas = currentParcelas.length > 0 ? currentParcelas[0].total_parcelas : 1;
-
+    const totalParcelas = currentParcelas.length > 0 ? currentParcelas[0].parcelas : 1;
     const daysToAdd = nextNro * 30;
 
   // 🚨 VERIFICAÇÃO: Calcula a data SOMENTE se dataGasto estiver preenchida.
@@ -137,9 +129,9 @@ const addParcela = () => {
         : ''; // Se vazio, a data da parcela fica vazia.
 
     const newParcela = {
-        total_parcelas: nextNro, // Assume-se que, ao adicionar uma, o total aumenta
-        parcela_nro: nextNro,
-        valor: 0.00,
+        parcelas: nextNro, // Assume-se que, ao adicionar uma, o total aumenta
+        numero_parcela: nextNro,
+        valor_parcela: 0.00,
         data_parcela: props.dataGasto || '' // Usa a data principal como sugestão
     };
 
@@ -155,7 +147,7 @@ const removeParcela = (index) => {
   
   // Reorganiza os números e o total das parcelas restantes
   currentParcelas.forEach((p, i) => {
-    p.parcela_nro = i + 1;
+    p.numero_parcela = i + 1;
   });
   
   const newTotal = currentParcelas.length;
@@ -164,7 +156,7 @@ const removeParcela = (index) => {
   model.value = currentParcelas;
 };
 
-// 3. Atualiza um campo específico de uma parcela (Valor ou Data)
+// 3. Atualiza um campo específico de uma parcela (valor_parcela ou Data)
 const updateParcelaField = (index, field, value) => {
   const currentParcelas = [...model.value];
   currentParcelas[index][field] = value;
@@ -185,7 +177,7 @@ const updateTotalParcelas = (newTotalString, index) => {
 
 const updateAllTotalParcelas = (newTotal, parcelasArray) => {
     parcelasArray.forEach(p => {
-        p.total_parcelas = newTotal;
+        p.parcelas = newTotal;
     });
 }
 </script>
